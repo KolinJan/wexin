@@ -14,10 +14,5 @@
    </scroll-view>
 </view>
 
-<checkbox-group bindchange="checkboxChange">
-  <label  wx:for="{{items}}">
-    <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-  </label>
-</checkbox-group>
 
 </view>

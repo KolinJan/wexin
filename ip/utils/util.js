@@ -16,8 +16,31 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
+
+// 调用第三方API接口
+ function  getIpInfo(ip,result){
+   wx.request({
+      url: "http://ip.taobao.com/service/getIpInfo.php?ip="+ip,
+      data: {
+        x: '' ,
+        y: ''
+      },
+       header: {
+      'Content-Type': 'application/json'
+       },
+      success: function(res) {
+         // console.log(res.data)
+         result(res.data)
+      }
+    })
+ }
+
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  getIpInfo:getIpInfo
 }
+
+
 
 
