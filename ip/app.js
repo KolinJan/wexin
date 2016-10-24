@@ -38,7 +38,8 @@ App({
        },
       success: function(res) {
          // console.log(res.data)
-         result(res.data)
+         // 判断result是不是函数（即回调函数）,如果是就把结果作为参数传回去
+         typeof result == "funciton" && result(res.data)  
       }
     })
  },
