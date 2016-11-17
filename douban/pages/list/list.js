@@ -8,6 +8,7 @@ Page({
     type: 'in_theaters',
     subtitle: '加载中...',
     loading: true,
+    page:1,
     movies: []
   },
   onLoad:function(options){
@@ -17,8 +18,8 @@ Page({
     this.data.type = options.type 
     this.data.title = options.title 
    
-    douban.theme(this.data.type,1,50,function(data){   // 小程序对返回数据的大小有限制，返回100条数据时就返回失败，设置了50条
-      // console.log(data.subjects)
+    douban.theme(this.data.type,1,10,function(data){
+      //console.log(data.subjects)
       that.setData({subtitle: data.title,movies: data.subjects, loading: false })
     })
   },
@@ -34,6 +35,32 @@ Page({
   },
   onUnload:function(){
     // 页面关闭
+  },
+  
+ onPullDownRefresh(){
+   // 往上拉刷新页面，即清楚历史数据，重新加载
+    var that = this
+    douban.theme(this.data.type,1,10,function(data){
+      //console.log(data.subjects)
+      that.setData({subtitle: data.title,movies: data.subjects, loading: false })
+    })
+
+ },
+
+onReachBottom(){
+  // 往下拉触底加载新的数据，并将新老数据一起渲染
+    var that = this;
+    this.data.page +=1
+    douban.theme(this.data.type,this.data.page,10,function(data){
+          var newdata = data.subjects
+          if(newdata.length == 0){
+            console.log("没有更多数据了")
+          }
+          var olddata = that.data.movies
+          var result = olddata.concat(newdata)
+          that.setData({subtitle: data.title,movies: result, loading: false })
+        })
   }
+
 })
 

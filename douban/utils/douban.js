@@ -1,5 +1,8 @@
 const API_URL = 'https://api.douban.com/v2/movie'
 
+
+
+
 // 豆瓣电影主题API，获取所有在线，即将上映和前250的电影，in_theaters  coming_soon  top250
 function theme(type,page=1,count=20,result){
    const params = { start: (page - 1) * count, count: count }

@@ -14,9 +14,9 @@ Page({
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     var that = this
-    // app.theme('in_theaters',1,5,function(data){     // API定义到全局app.js的调用方式
-    douban.theme('in_theaters',1,5,function(data){     // api定义到utils中的调用方式
-      // console.log(data.subjects)
+    //app.theme('in_theaters',1,5,function(data){
+    douban.theme('in_theaters',1,5,function(data){
+      //console.log(data.subjects)
       that.setData({ in_movies: data.subjects, loading: false })
     })
     douban.theme('coming_soon',1,5,function(data){
